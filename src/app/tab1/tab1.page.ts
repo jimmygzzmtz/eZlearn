@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { SetDetailPage } from '../set-detail/set-detail.page';
 import { Storage } from '@ionic/storage';
+import { PracticePage } from '../practice/practice.page';
 
 @Component({
   selector: 'app-tab1',
@@ -24,10 +25,6 @@ export class Tab1Page {
 
   }
 
-  ionViewDidEnter(){
-    console.log("test")
-  }
-
   async addSet() {
     //create new set with only 1 term, but not in storage
     //send to navctrl
@@ -48,8 +45,8 @@ export class Tab1Page {
     title: "",
     cards: [{term: "", definition: ""}],
     cardsNum: 0,
-    date: new Date,
-    practiced: 0,
+    date: new Date
+    //practiced: 0,
     } 
 
     const modal = await this.modalController.create({
@@ -69,8 +66,8 @@ export class Tab1Page {
                 title: data.data.title,
                 cards: data.data.cards,
                 cardsNum: data.data.cardsNum,
-                date: data.data.date,
-                practiced: data.data.practiced
+                date: data.data.date
+                //practiced: data.data.practiced
               })
             }
             else{
@@ -99,12 +96,14 @@ export class Tab1Page {
 
   async editSet(set) {
 
+    var copySet = JSON.parse(JSON.stringify(set))
+
     let index = this.sets.indexOf(set);
 
     const modal = await this.modalController.create({
       component: SetDetailPage,
       componentProps: {
-        newSet: set 
+        newSet: copySet 
       },
       cssClass: "fullscreenModal"
     });
@@ -119,6 +118,21 @@ export class Tab1Page {
 
     await modal.present(); 
 
+  }
+
+  async practice(set){
+
+    var copySet = JSON.parse(JSON.stringify(set))
+
+    const modal = await this.modalController.create({
+      component: PracticePage,
+      componentProps: {
+        practiceSet: copySet 
+      },
+      cssClass: "fullscreenModal"
+    });
+
+    await modal.present(); 
   }
 
   

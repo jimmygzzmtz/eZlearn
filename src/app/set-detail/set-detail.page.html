@@ -12,10 +12,19 @@
       <ion-label position="stacked">Title</ion-label>
       <ion-input [(ngModel)]="title"></ion-input>
     </ion-item>
-    <ion-item *ngFor="let card of cards">
-      <ion-input placeholder="Term" [(ngModel)]="card.term"></ion-input>
-      <ion-textarea rows="10" cols="10" placeholder="Definition" [(ngModel)]="card.definition"></ion-textarea>
-    </ion-item>
+
+    <ion-card *ngFor="let card of cards">
+        <ion-item>
+          <ion-card-title><ion-input placeholder="Term" [(ngModel)]="card.term"></ion-input></ion-card-title>
+          <ion-button fill="outline" color="danger" slot="end" (click)="removeCard(card)">
+              <ion-icon name="remove"></ion-icon>
+          </ion-button>
+        </ion-item>
+      <ion-card-content>
+          <ion-textarea rows="10" cols="10" placeholder="Definition" [(ngModel)]="card.definition"></ion-textarea>
+      </ion-card-content>
+    </ion-card>
+
     <div class="ion-padding">
         <ion-button expand="block" type="submit" class="ion-no-margin" (click)="addTerm()">Add Term</ion-button>
     </div>

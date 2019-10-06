@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-set-detail',
@@ -13,7 +13,8 @@ export class SetDetailPage implements OnInit {
 
   public newSet: any
 
-  constructor(public navCtrl: NavController, public modalController: ModalController) { 
+
+  constructor(public navCtrl: NavController, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController) { 
     /*
     this.set = window.history.state.set
     this.cards = this.set.cards
@@ -26,9 +27,21 @@ export class SetDetailPage implements OnInit {
       this.cards = this.newSet.cards
       this.title = this.newSet.title
     }
+    
+  }
+
+  removeCard(card) {
+
+    let index = this.cards.indexOf(card);
+
+        if(index > -1){
+            this.cards.splice(index, 1);
+        }
+
   }
 
   ngOnInit() {
+    
   }
 
   addTerm(){
@@ -53,6 +66,79 @@ export class SetDetailPage implements OnInit {
 
   dismiss(){
     this.modalController.dismiss();
+  }
+
+  async export(){
+    let newNavigator: any;
+    newNavigator = window.navigator;
+
+    if (newNavigator && newNavigator.share) {
+      newNavigator.share({
+        title: this.title,
+        text: JSON.stringify(this.newSet),
+        //url: final url of app,
+      })
+    } else {
+      let listener = (e: ClipboardEvent) => {
+        e.clipboardData.setData('text/plain', (JSON.stringify(this.newSet)));
+        e.preventDefault();
+      };
+
+      document.addEventListener('copy', listener);
+      document.execCommand('copy');
+      document.removeEventListener('copy', listener);
+
+      const toast = await this.toastController.create({
+        message: this.title + ' has been copied to the clipboard.',
+        duration: 2000
+      });
+      toast.present();
+    }
+  }
+
+  async import(){
+
+    const alert = await this.alertController.create({
+      header: 'Import',
+      inputs: [
+        {
+          name: 'code',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+            text: 'Cancel'
+        },
+        {
+            text: 'Save',
+            handler: data => {
+
+              try{
+                JSON.parse(data.code)
+
+                if(data.code != ""){
+
+                  var codedSet = JSON.parse(data.code)
+                  this.cards = codedSet.cards
+                  this.title = codedSet.title
+  
+                }
+                else{
+                  return false;
+                }
+              }
+              catch{
+                console.log("error")
+                return false;
+              }
+
+            }
+        }
+    ]
+    });
+
+    await alert.present();
   }
 
 }
