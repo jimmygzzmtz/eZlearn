@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Set Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+      <ion-label position="stacked">Title</ion-label>
+      <ion-input [(ngModel)]="title"></ion-input>
+    </ion-item>
+    <ion-item *ngFor="let card of cards">
+      <ion-input placeholder="Term" [(ngModel)]="card.term"></ion-input>
+      <ion-textarea rows="10" cols="10" placeholder="Definition" [(ngModel)]="card.definition"></ion-textarea>
+    </ion-item>
+    <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="addTerm()">Add Term</ion-button>
+    </div>
+    <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="save()">Save</ion-button>
+    </div>
+    <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="import()">Import</ion-button>
+    </div>
+    <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="export()">Export</ion-button>
+    </div>
+
+</ion-content>

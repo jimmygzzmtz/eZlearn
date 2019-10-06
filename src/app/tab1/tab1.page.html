@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Learn
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngFor="let set of sets">
+        <ion-item>
+          <ion-card-title>{{set.title}}</ion-card-title>
+          <ion-button fill="outline" color="success" slot="end" (click)="practice(set)">
+              <ion-icon name="bookmarks"></ion-icon>
+          </ion-button>
+          <ion-button fill="outline" slot="end" (click)="editSet(set)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="outline" color="danger" slot="end" (click)="removeSet(set)">
+              <ion-icon name="remove"></ion-icon>
+          </ion-button>
+        </ion-item>
+      <ion-card-content>
+        <p>Created on {{ set.date | date : 'EEEE, MMM d, y, h:mm a'}}.</p>
+        <p>Contains {{set.cardsNum}} card(s).</p>
+        <p>Practiced {{set.practiced}} times.</p>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="addSet()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
