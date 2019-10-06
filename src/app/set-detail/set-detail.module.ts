@@ -5,12 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SetDetailPage } from './set-detail.page';
-
 const routes: Routes = [
   {
-    path: '',
-    component: SetDetailPage
+    path: ''
   }
 ];
 
@@ -21,6 +18,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SetDetailPage]
+  declarations: []
 })
 export class SetDetailPageModule {}

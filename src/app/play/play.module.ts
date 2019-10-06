@@ -5,12 +5,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlayPage } from './play.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: PlayPage
+    path: ''
   }
 ];
 
@@ -21,6 +19,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PlayPage]
+  declarations: []
 })
 export class PlayPageModule {}
