@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, ActionSheetController  } from '@ionic/angular';
 import { SetDetailPage } from '../set-detail/set-detail.page';
 import { Storage } from '@ionic/storage';
 import { PracticePage } from '../practice/practice.page';
+import { PlayPage } from '../play/play.page';
 
 @Component({
   selector: 'app-tab1',
@@ -12,8 +13,9 @@ import { PracticePage } from '../practice/practice.page';
 export class Tab1Page {
 
   public sets: any = [];
+  public questStats: any;
 
-  constructor(public navCtrl: NavController, public modalController: ModalController, private storage: Storage) {
+  constructor(public navCtrl: NavController, public modalController: ModalController, private storage: Storage, public actionSheetController: ActionSheetController) {
     this.storage.get('setsArr').then((val) => {
       if (val != "[]"){
        this.sets = JSON.parse(val)
@@ -23,6 +25,60 @@ export class Tab1Page {
       }
     });
 
+    this.storage.get('questStats').then((val) => {
+      if (val != null){
+       this.questStats = JSON.parse(val)
+      }
+      else{
+      this.questStats = {
+          world: 1,
+          hp: 100,
+          level: 1,
+          exp: 0
+          }
+       this.storage.set('questStats', JSON.stringify(this.questStats));
+      }
+    });
+
+  }
+
+  async openMenu(set){
+    const actionSheet = await this.actionSheetController.create({
+      header: set.title,
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          this.removeSet(set)
+        }
+      }, {
+        text: 'Details',
+        icon: 'information-circle-outline',
+        handler: () => {
+          this.editSet(set)
+        }
+      }, {
+        text: 'Practice',
+        icon: 'school',
+        handler: () => {
+          this.practice(set)
+        }
+      }, {
+        text: 'Quest',
+        icon: 'logo-game-controller-a',
+        handler: () => {
+          this.play(set)
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
   async addSet() {
@@ -131,6 +187,33 @@ export class Tab1Page {
       },
       cssClass: "fullscreenModal"
     });
+
+    await modal.present(); 
+  }
+
+  async play(set){
+
+    var copySet = JSON.parse(JSON.stringify(set))
+    var questStatsCopy = JSON.parse(JSON.stringify(this.questStats))
+
+    const modal = await this.modalController.create({
+      component: PlayPage,
+      componentProps: {
+        playSet: copySet,
+        questStats: questStatsCopy 
+      },
+      cssClass: "fullscreenModal"
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+          if (data.data != undefined){
+            this.questStats = data.data
+            this.storage.set('questStats', JSON.stringify(this.questStats));
+          }
+    });
+
+    await modal.present(); 
 
     await modal.present(); 
   }

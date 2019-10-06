@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { SetDetailPage } from '../set-detail/set-detail.page';
 import { PracticePage } from '../practice/practice.page';
+import { PlayPage } from '../play/play.page';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { PracticePage } from '../practice/practice.page';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page, SetDetailPage, PracticePage],
-  entryComponents: [SetDetailPage, PracticePage]
+  declarations: [Tab1Page, SetDetailPage, PracticePage, PlayPage],
+  entryComponents: [SetDetailPage, PracticePage, PlayPage]
 })
 export class Tab1PageModule {}

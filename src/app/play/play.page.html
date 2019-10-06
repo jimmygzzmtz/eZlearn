@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Quest</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-item>
+          <ion-card-title>Battle</ion-card-title>
+        </ion-item>
+      <ion-card-content>
+        <p><b>World: </b>{{questStats.world}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+          <ion-card-title>{{enemyName}}</ion-card-title>
+        </ion-item>
+      <ion-card-content>
+        <p><b>HP: </b>{{enemyHP}}</p>
+        <p><b>Attack: </b>{{enemyAttack}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+          <ion-card-title>Player</ion-card-title>
+        </ion-item>
+      <ion-card-content>
+        <p><b>HP: </b>{{questStats.hp}}</p>
+        <p><b>Level: </b>{{questStats.level}}</p>
+        <p><b>EXP: </b>{{questStats.exp}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+          <ion-card-title>Your Attack</ion-card-title>
+          <ion-button fill="outline" color="success" slot="end" (click)="attack()">
+              <ion-icon name="arrow-round-up"></ion-icon>
+          </ion-button>
+        </ion-item>
+      <ion-card-content>
+          <ion-input [(ngModel)]="playerAttack" placeholder="Term"></ion-input>
+      </ion-card-content>
+    </ion-card>
+</ion-content>

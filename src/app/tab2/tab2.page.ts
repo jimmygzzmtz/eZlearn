@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  public questStats: any = {};
 
-  constructor() {}
+  constructor(private storage: Storage) {
+
+  }
+
+  ionViewWillEnter(){
+    this.storage.get('questStats').then((val) => {
+      if (val != null){
+       this.questStats = JSON.parse(val)
+      }
+      else{
+      this.questStats = {
+          world: 1,
+          hp: 100,
+          level: 1,
+          exp: 0
+          }
+       this.storage.set('questStats', JSON.stringify(this.questStats));
+      }
+    });
+  }
 
 }

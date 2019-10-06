@@ -11,14 +11,8 @@
     <ion-card *ngFor="let set of sets">
         <ion-item>
           <ion-card-title>{{set.title}}</ion-card-title>
-          <ion-button fill="outline" color="success" slot="end" (click)="practice(set)">
-              <ion-icon name="bookmarks"></ion-icon>
-          </ion-button>
-          <ion-button fill="outline" slot="end" (click)="editSet(set)">
-              <ion-icon name="information-circle-outline"></ion-icon>
-          </ion-button>
-          <ion-button fill="outline" color="danger" slot="end" (click)="removeSet(set)">
-              <ion-icon name="remove"></ion-icon>
+          <ion-button fill="outline" slot="end" (click)="openMenu(set)">
+              <ion-icon name="menu"></ion-icon>
           </ion-button>
         </ion-item>
       <ion-card-content>
