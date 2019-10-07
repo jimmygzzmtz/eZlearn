@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Learn
+      {{ 'Learn' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,8 +16,8 @@
           </ion-button>
         </ion-item>
       <ion-card-content>
-        <p>Created on {{ set.date | date : 'EEEE, MMM d, y, h:mm a'}}.</p>
-        <p>Contains {{set.cardsNum}} card(s).</p>
+        <p>{{ 'Created' | translate }} {{ set.date | date : 'EEEE, MMM d, y, h:mm a' : '' : this.language}}</p>
+        <p>{{ 'Contains' | translate }} {{set.cardsNum}} {{ 'cards' | translate }}.</p>
       </ion-card-content>
     </ion-card>
 

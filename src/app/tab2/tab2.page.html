@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Quest Stats
+      {{ 'QuestStats' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,19 +9,19 @@
 <ion-content>
     <ion-card>
         <ion-item>
-          <ion-card-title>Player Stats</ion-card-title>
+          <ion-card-title translate>PlayerStats</ion-card-title>
         </ion-item>
       <ion-card-content>
-        <p><b>Level: </b>{{questStats.level}}</p>
-        <p><b>EXP: </b>{{questStats.exp}}</p>
+        <p><b>{{ 'Level' | translate }}: </b>{{questStats.level}}</p>
+        <p><b>{{ 'EXP' | translate }}: </b>{{questStats.exp}}</p>
       </ion-card-content>
     </ion-card>
     <ion-card>
         <ion-item>
-          <ion-card-title>Game Progress</ion-card-title>
+          <ion-card-title translate>GameProgress</ion-card-title>
         </ion-item>
       <ion-card-content>
-        <p><b>World: </b>{{questStats.world}}</p>
+        <p><b>{{ 'World' | translate }}: </b>{{questStats.world}}</p>
       </ion-card-content>
     </ion-card>
 </ion-content>

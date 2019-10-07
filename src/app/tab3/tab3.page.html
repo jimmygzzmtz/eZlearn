@@ -1,21 +1,48 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Settings
+      {{ 'Settings' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-item lines="full">
+    <ion-icon slot="start" name="moon"></ion-icon>
+    <ion-label translate>Dark</ion-label>
+    <ion-select id="darkOptSettings" (ionChange)="selectDarkTheme()" interface="popover">
+        <ion-select-option value="system" translate>System</ion-select-option>
+        <ion-select-option value="on" translate>On</ion-select-option>
+        <ion-select-option value="off" translate>Off</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-icon slot="start" name="flag"></ion-icon>
+    <ion-label translate>Language</ion-label>
+    <ion-select [(ngModel)]="lang" (ionChange)="switchLang(lang)" placeholder="Select One" interface="popover">
+      <ion-select-option value="en" translate>English</ion-select-option>
+      <ion-select-option value="es" translate>Spanish</ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <ion-item (click)="installPrompt()" lines="full">
       <ion-icon slot="start" name="download"></ion-icon>
-      <ion-label>Install</ion-label>
+      <ion-label translate>Install</ion-label>
   </ion-item>
+
+  <ion-item (click)="clearStorage()" lines="full">
+      <ion-icon slot="start" name="trash"></ion-icon>
+      <ion-label translate>ClearSt</ion-label>
+  </ion-item>
+
   <ion-item lines="full">
       <ion-icon slot="start" name="information-circle-outline"></ion-icon>
       <ion-label>
-        <span>Version </span>
-        <span>0.0.6</span>
+        <span translate>Version </span>
+        <span>0.0.7</span>
       </ion-label>
   </ion-item>
+
 </ion-content>

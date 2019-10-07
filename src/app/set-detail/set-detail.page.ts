@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ToastController, AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-set-detail',
@@ -14,7 +15,7 @@ export class SetDetailPage implements OnInit {
   public newSet: any
 
 
-  constructor(public navCtrl: NavController, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController) { 
+  constructor(public navCtrl: NavController, public modalController: ModalController, public toastController: ToastController, public alertController: AlertController, private _translate: TranslateService) { 
     /*
     this.set = window.history.state.set
     this.cards = this.set.cards
@@ -52,7 +53,7 @@ export class SetDetailPage implements OnInit {
 
     if(this.checkEmpty() == true){
       const alert = await this.alertController.create({
-        header: "Please fill in the title and all the terms and definitions.",
+        header: this._translate.instant('FillInput'),
         buttons: [
           {
               text: 'OK'
@@ -103,7 +104,7 @@ export class SetDetailPage implements OnInit {
   async export(){
     if(this.checkEmpty() == true){
       const alert = await this.alertController.create({
-        header: "Please fill in the title and all the terms and definitions",
+        header: this._translate.instant('FillInput'),
         buttons: [
           {
               text: 'OK'
@@ -133,7 +134,7 @@ export class SetDetailPage implements OnInit {
         document.removeEventListener('copy', listener);
 
         const toast = await this.toastController.create({
-          message: this.title + ' has been copied to the clipboard.',
+          message: this.title + this._translate.instant('Clipboard'),
           duration: 2000
         });
         toast.present();
@@ -145,7 +146,7 @@ export class SetDetailPage implements OnInit {
   async import(){
 
     const alert = await this.alertController.create({
-      header: 'Import',
+      header: this._translate.instant('Import'),
       inputs: [
         {
           name: 'code',
@@ -154,10 +155,10 @@ export class SetDetailPage implements OnInit {
       ],
       buttons: [
         {
-            text: 'Cancel'
+            text: this._translate.instant('Cancel')
         },
         {
-            text: 'Save',
+            text: this._translate.instant('Save'),
             handler: data => {
 
               try{

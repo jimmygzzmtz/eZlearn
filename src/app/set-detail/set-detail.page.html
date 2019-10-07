@@ -1,41 +1,41 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
+          <ion-back-button text="{{ 'Back' | translate }}" defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
         </ion-buttons>
-    <ion-title>Set Details</ion-title>
+    <ion-title translate>SetDetails</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-item>
-      <ion-label position="stacked">Title</ion-label>
+      <ion-label position="stacked" translate>Title</ion-label>
       <ion-input [(ngModel)]="title"></ion-input>
     </ion-item>
 
     <ion-card *ngFor="let card of cards">
         <ion-item>
-          <ion-card-title><ion-input placeholder="Term" [(ngModel)]="card.term"></ion-input></ion-card-title>
+          <ion-card-title><ion-input placeholder="{{ 'Term' | translate }}" [(ngModel)]="card.term"></ion-input></ion-card-title>
           <ion-button fill="outline" color="danger" slot="end" (click)="removeCard(card)">
               <ion-icon name="remove"></ion-icon>
           </ion-button>
         </ion-item>
       <ion-card-content>
-          <ion-textarea rows="10" cols="10" placeholder="Definition" [(ngModel)]="card.definition"></ion-textarea>
+          <ion-textarea rows="10" cols="10" placeholder="{{ 'Definition' | translate }}" [(ngModel)]="card.definition"></ion-textarea>
       </ion-card-content>
     </ion-card>
 
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="addTerm()">Add Term</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="addTerm()" translate>AddTerm</ion-button>
     </div>
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="save()">Save</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="save()" translate>Save</ion-button>
     </div>
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="import()">Import</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="import()" translate>Import</ion-button>
     </div>
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="export()">Export</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="export()" translate>Export</ion-button>
     </div>
 
 </ion-content>

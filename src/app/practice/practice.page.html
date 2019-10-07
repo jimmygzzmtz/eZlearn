@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-        <ion-back-button defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
+        <ion-back-button text="{{ 'Back' | translate }}" defaultHref="/tabs/tab1" (click)="dismiss()"></ion-back-button>
     </ion-buttons>
-    <ion-title>Practice</ion-title>
+    <ion-title translate>Practice</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
 
     <ion-card *ngFor="let card of practiceSet.cards" color="{{card.answerColor}}">
         <ion-item color="{{card.answerColor}}">
-          <ion-card-title><ion-input placeholder="Term" [(ngModel)]="card.answerTerm"></ion-input></ion-card-title>
+          <ion-card-title><ion-input placeholder="{{ 'Term' | translate }}" [(ngModel)]="card.answerTerm"></ion-input></ion-card-title>
         </ion-item>
       <ion-card-content>
           <ion-textarea readonly = true rows="10" cols="10" placeholder="Definition" [(ngModel)]="card.definition"></ion-textarea>
@@ -19,11 +19,11 @@
     </ion-card>
 
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submit()">Submit</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submit()" translate>Submit</ion-button>
     </div>
 
     <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="clear()">Clear</ion-button>
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="clear()" translate>Clear</ion-button>
     </div>
 
 </ion-content>

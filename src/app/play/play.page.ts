@@ -20,8 +20,8 @@ export class PlayPage implements OnInit {
 
   public playerAttack: any;
 
-  public enemyList: any = [{name: "Rat", hp: 25}, {name: "Black Knight", hp: 500}, {name: "Zombie", hp: 200}, 
-  {name: "Wolf", hp: 100}, {name: "Goblin", hp: 75}, {name: "Dark Wizard", hp: 200}]
+  public enemyList: any = [{name: "Rat", hp: 25}, {name: "BlackKnight", hp: 500}, {name: "Zombie", hp: 200}, 
+  {name: "Wolf", hp: 100}, {name: "Goblin", hp: 75}, {name: "DarkWizard", hp: 200}]
 
   public newExp: any;
 

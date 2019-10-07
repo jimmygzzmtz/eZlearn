@@ -4,6 +4,7 @@ import { SetDetailPage } from '../set-detail/set-detail.page';
 import { Storage } from '@ionic/storage';
 import { PracticePage } from '../practice/practice.page';
 import { PlayPage } from '../play/play.page';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab1',
@@ -14,8 +15,9 @@ export class Tab1Page {
 
   public sets: any = [];
   public questStats: any;
+  public language: any;
 
-  constructor(public navCtrl: NavController, public modalController: ModalController, private storage: Storage, public actionSheetController: ActionSheetController) {
+  constructor(public navCtrl: NavController, public modalController: ModalController, private storage: Storage, public actionSheetController: ActionSheetController, private _translate: TranslateService) {
     this.storage.get('setsArr').then((val) => {
       if (val != "[]"){
        this.sets = JSON.parse(val)
@@ -40,38 +42,88 @@ export class Tab1Page {
       }
     });
 
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    prefersDark.addListener((e) => this.checkToggle(e.matches));
+    this.checkToggle(prefersDark.matches)
+
+  }
+
+  ngOnInit() {
+    this.storage.get('lang').then((val) => {
+      if (val != null){
+        this._translate.use(val);
+        this.language = val;
+      }
+      else{
+        this._translate.use(this._translate.getBrowserLang());
+       this.storage.set('lang', this._translate.getBrowserLang());
+       this.language = this._translate.getBrowserLang()
+      }
+
+    });
+  }
+
+  checkToggle(shouldCheck) {
+    var darkOpt
+
+    this.storage.get('darkMode').then((val) => {
+      if (val != null){
+        darkOpt = val
+      }
+      else{
+       this.storage.set('darkMode', 'system');
+       darkOpt = 'system'
+      }
+
+      if(darkOpt == 'system'){
+        if(shouldCheck == true){
+          document.body.classList.add('dark')
+        }
+        if(shouldCheck == false){
+          document.body.classList.remove('dark')
+        }
+      }
+
+      if(darkOpt == 'on'){
+        document.body.classList.add('dark')
+      }
+      if(darkOpt == 'off'){
+        document.body.classList.remove('dark')
+      }
+    });
+
   }
 
   async openMenu(set){
     const actionSheet = await this.actionSheetController.create({
       header: set.title,
       buttons: [{
-        text: 'Delete',
+        text: this._translate.instant('Delete'),
         role: 'destructive',
         icon: 'trash',
         handler: () => {
           this.removeSet(set)
         }
       }, {
-        text: 'Details',
+        text: this._translate.instant('Details'),
         icon: 'information-circle-outline',
         handler: () => {
           this.editSet(set)
         }
       }, {
-        text: 'Practice',
+        text: this._translate.instant('Practice'),
         icon: 'school',
         handler: () => {
           this.practice(set)
         }
       }, {
-        text: 'Quest',
+        text: this._translate.instant('Battle'),
         icon: 'logo-game-controller-a',
         handler: () => {
           this.play(set)
         }
       }, {
-        text: 'Cancel',
+        text: this._translate.instant('Cancel'),
         icon: 'close',
         role: 'cancel',
         handler: () => {
