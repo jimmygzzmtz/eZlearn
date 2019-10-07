@@ -48,19 +48,51 @@ export class SetDetailPage implements OnInit {
     this.cards.push({term: "", definition: ""})
   }
 
-  save(){
-    this.newSet.title = this.title
-    this.newSet.cards = this.cards
-    //console.log(this.set)
+  async save(){
+
+    if(this.checkEmpty() == true){
+      const alert = await this.alertController.create({
+        header: "Please fill in the title and all the terms and definitions.",
+        buttons: [
+          {
+              text: 'OK'
+          }
+      ]
+      });
+      await alert.present();
+    }
+    else{
+      this.newSet.title = this.title
+      this.newSet.cards = this.cards
+      //console.log(this.set)
+      
+      //window.history.state.set = this.set
+      //console.log(window.history.state.set)
+      //this.navCtrl.back()
+      //this.navCtrl.navigateBack('tab1', { state: { setSend } });
+
+      this.newSet.cardsNum = this.newSet.cards.length
+
+      this.modalController.dismiss(this.newSet)
+    }
+
     
-    //window.history.state.set = this.set
-    //console.log(window.history.state.set)
-    //this.navCtrl.back()
-    //this.navCtrl.navigateBack('tab1', { state: { setSend } });
 
-    this.newSet.cardsNum = this.newSet.cards.length
+  }
 
-    this.modalController.dismiss(this.newSet)
+  checkEmpty(){
+
+    if(this.title == "" || this.title == undefined || this.title == null){
+      return true
+    }
+
+    for(var i = 0; i < this.cards.length; i++){
+      if(this.cards[i].term == undefined || this.cards[i].term == null || this.cards[i].term == "" || this.cards[i].definition == undefined || this.cards[i].definition == null || this.cards[i].definition == ""){
+        return true
+      }
+    }
+
+    return false
 
   }
 
@@ -69,31 +101,45 @@ export class SetDetailPage implements OnInit {
   }
 
   async export(){
-    let newNavigator: any;
-    newNavigator = window.navigator;
-
-    if (newNavigator && newNavigator.share) {
-      newNavigator.share({
-        title: this.title,
-        text: JSON.stringify(this.newSet),
-        //url: final url of app,
-      })
-    } else {
-      let listener = (e: ClipboardEvent) => {
-        e.clipboardData.setData('text/plain', (JSON.stringify(this.newSet)));
-        e.preventDefault();
-      };
-
-      document.addEventListener('copy', listener);
-      document.execCommand('copy');
-      document.removeEventListener('copy', listener);
-
-      const toast = await this.toastController.create({
-        message: this.title + ' has been copied to the clipboard.',
-        duration: 2000
+    if(this.checkEmpty() == true){
+      const alert = await this.alertController.create({
+        header: "Please fill in the title and all the terms and definitions",
+        buttons: [
+          {
+              text: 'OK'
+          }
+      ]
       });
-      toast.present();
+      await alert.present();
     }
+    else{
+      let newNavigator: any;
+      newNavigator = window.navigator;
+
+      if (newNavigator && newNavigator.share) {
+        newNavigator.share({
+          title: this.title,
+          text: JSON.stringify(this.newSet),
+          //url: final url of app,
+        })
+      } else {
+        let listener = (e: ClipboardEvent) => {
+          e.clipboardData.setData('text/plain', (JSON.stringify(this.newSet)));
+          e.preventDefault();
+        };
+
+        document.addEventListener('copy', listener);
+        document.execCommand('copy');
+        document.removeEventListener('copy', listener);
+
+        const toast = await this.toastController.create({
+          message: this.title + ' has been copied to the clipboard.',
+          duration: 2000
+        });
+        toast.present();
+      }
+    }
+    
   }
 
   async import(){

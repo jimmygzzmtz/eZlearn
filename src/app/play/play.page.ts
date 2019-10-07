@@ -72,6 +72,8 @@ export class PlayPage implements OnInit {
     if(this.enemyHP <= 0){
       //console.log("win")
 
+      this.enemyHP = 0
+
       const alert = await this.alertController.create({
         header: 'You won!',
         buttons: [
@@ -105,6 +107,8 @@ export class PlayPage implements OnInit {
     }
     if(this.questStats.hp <= 0){
       //console.log("lose")
+
+      this.questStats.hp = 0
 
       const alert = await this.alertController.create({
         header: 'You lost...',
