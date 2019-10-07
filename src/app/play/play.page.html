@@ -8,16 +8,16 @@
 </ion-header>
 
 <ion-content>
-    <ion-card>
-        <ion-item>
+    <ion-card color="medium">
+        <ion-item color="medium">
           <ion-card-title>Battle</ion-card-title>
         </ion-item>
       <ion-card-content>
         <p><b>World: </b>{{questStats.world}}</p>
       </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-item>
+    <ion-card color="danger">
+        <ion-item color="danger">
           <ion-card-title>{{enemyName}}</ion-card-title>
         </ion-item>
       <ion-card-content>
@@ -25,8 +25,8 @@
         <p><b>Attack: </b>{{enemyAttack}}</p>
       </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-item>
+    <ion-card color="success">
+        <ion-item color="success">
           <ion-card-title>Player</ion-card-title>
         </ion-item>
       <ion-card-content>
@@ -35,10 +35,10 @@
         <p><b>EXP: </b>{{questStats.exp}}</p>
       </ion-card-content>
     </ion-card>
-    <ion-card>
-        <ion-item>
+    <ion-card color="secondary">
+        <ion-item color="secondary">
           <ion-card-title>Your Attack</ion-card-title>
-          <ion-button fill="outline" color="success" slot="end" (click)="attack()">
+          <ion-button fill="solid" color="danger" slot="end" (click)="attack()">
               <ion-icon name="arrow-round-up"></ion-icon>
           </ion-button>
         </ion-item>

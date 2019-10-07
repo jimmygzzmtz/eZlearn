@@ -14,7 +14,7 @@ export class PracticePage implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.practiceSet.cards = this.shuffle(this.practiceSet.cards)
   }
 
   dismiss(){
@@ -44,5 +44,16 @@ export class PracticePage implements OnInit {
       delete this.practiceSet.cards[i].answerColor
     }
   }
+
+  shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+}
 
 }

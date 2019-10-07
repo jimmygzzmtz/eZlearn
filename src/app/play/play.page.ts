@@ -14,13 +14,14 @@ export class PlayPage implements OnInit {
   public enemyName: any;
   public enemyHP: any;
   //public enemyLevel: any;
-  public selectedTerm:any;
+  public selectedTerm: any;
+  public selectedEnemy: any;
   public enemyAttack: any;
 
   public playerAttack: any;
 
-  public enemyList: any = [{name: "Rat", hp: 25, chance: 0.40}, {name: "Black Knight", hp: 500, chance: 0.05}, 
-  {name: "Zombie", hp: 200, chance: 0.10}, {name: "Wolf", hp: 100, chance: 0.15}, {name: "Goblin", hp: 75, chance: 0.20}, {name: "Dark Wizard", hp: 200, chance: 0.10}]
+  public enemyList: any = [{name: "Rat", hp: 25}, {name: "Black Knight", hp: 500}, {name: "Zombie", hp: 200}, 
+  {name: "Wolf", hp: 100}, {name: "Goblin", hp: 75}, {name: "Dark Wizard", hp: 200}]
 
   public newExp: any;
 
@@ -31,37 +32,9 @@ export class PlayPage implements OnInit {
   ngOnInit() {
     //console.log(this.enemyList)
 
-    var randEnemyNum = Math.floor((Math.random() * 100) + 1)
-
-    if (randEnemyNum >= 0 && randEnemyNum <= 40) {
-      this.enemyName = "Rat"
-      this.enemyHP = 25
-    }
-
-    if (randEnemyNum >= 41 && randEnemyNum <= 45) {
-      this.enemyName = "Black Knight"
-      this.enemyHP = 500
-    }
-
-    if (randEnemyNum >= 46 && randEnemyNum <= 55) {
-      this.enemyName = "Zombie"
-      this.enemyHP = 200
-    }
-
-    if (randEnemyNum >= 56 && randEnemyNum <= 70) {
-      this.enemyName = "Wolf"
-      this.enemyHP = 100
-    }
-
-    if (randEnemyNum >= 71 && randEnemyNum <= 90) {
-      this.enemyName = "Goblin"
-      this.enemyHP = 75
-    }
-
-    if (randEnemyNum >= 91 && randEnemyNum <= 100) {
-      this.enemyName = "Dark Wizard"
-      this.enemyHP = 200
-    }
+    this.selectedEnemy = this.enemyList[Math.floor((Math.random() * this.enemyList.length))]
+    this.enemyName = this.selectedEnemy.name
+    this.enemyHP = this.selectedEnemy.hp
 
     this.selectedTerm = this.playSet.cards[Math.floor((Math.random() * this.playSet.cards.length))]
     this.enemyAttack = this.selectedTerm.definition
