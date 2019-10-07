@@ -45,6 +45,8 @@
     "InstallGuideAndroid": "<ion-icon name='logo-android'></ion-icon> Tap on <ion-icon name='menu'></ion-icon>, then 'Add to Homescreen'.<br><br>",
     "InstallGuideDesktop": "<ion-icon name='logo-chrome'></ion-icon> Click on <ion-icon name='add'></ion-icon> on the address bar.",
     "Delete": "Delete",
+    "Lost": "You lost...",
+    "Won": "You won!",
     "Rat": "Rat",
     "BlackKnight": "Black Knight",
     "Zombie": "Zombie",

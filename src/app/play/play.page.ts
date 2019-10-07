@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-play',
@@ -25,7 +26,7 @@ export class PlayPage implements OnInit {
 
   public newExp: any;
 
-  constructor(public modalController: ModalController, public alertController: AlertController) { 
+  constructor(public modalController: ModalController, public alertController: AlertController, private _translate: TranslateService) { 
     
   }
 
@@ -75,13 +76,13 @@ export class PlayPage implements OnInit {
       this.enemyHP = 0
 
       const alert = await this.alertController.create({
-        header: 'You won!',
+        header: this._translate.instant('Won'),
         buttons: [
           {
               text: 'OK',
               handler: () => {
                 //exp to send is equals to newexp
-                console.log("new exp is " + this.newExp)
+                //console.log("new exp is " + this.newExp)
 
                 //add exp
                 //if exp > 100, level + 1 and exp - 100
@@ -111,7 +112,7 @@ export class PlayPage implements OnInit {
       this.questStats.hp = 0
 
       const alert = await this.alertController.create({
-        header: 'You lost...',
+        header: this._translate.instant('Lost'),
         buttons: [
           {
               text: 'OK',
