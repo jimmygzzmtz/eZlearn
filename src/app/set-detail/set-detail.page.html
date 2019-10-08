@@ -8,20 +8,21 @@
 </ion-header>
 
 <ion-content>
-    <ion-item>
-      <ion-label position="stacked" translate>Title</ion-label>
-      <ion-input [(ngModel)]="title"></ion-input>
-    </ion-item>
+    <ion-card>
+      <ion-item lines="none">
+        <ion-card-title><ion-input id="titleInput" (keydown)=onKeydownEvent($event) placeholder="{{ 'Title' | translate }}" [(ngModel)]="title"></ion-input></ion-card-title>
+      </ion-item>
+  </ion-card>
 
     <ion-card *ngFor="let card of cards">
         <ion-item>
-          <ion-card-title><ion-input placeholder="{{ 'Term' | translate }}" [(ngModel)]="card.term"></ion-input></ion-card-title>
+          <ion-card-title><ion-input (keydown)=onKeydownEvent($event) placeholder="{{ 'Term' | translate }}" [(ngModel)]="card.term"></ion-input></ion-card-title>
           <ion-button fill="outline" color="danger" slot="end" (click)="removeCard(card)">
               <ion-icon name="remove"></ion-icon>
           </ion-button>
         </ion-item>
       <ion-card-content>
-          <ion-textarea rows="10" cols="10" placeholder="{{ 'Definition' | translate }}" [(ngModel)]="card.definition"></ion-textarea>
+          <ion-textarea (keydown)=onKeydownEvent($event) rows="10" cols="10" placeholder="{{ 'Definition' | translate }}" [(ngModel)]="card.definition"></ion-textarea>
       </ion-card-content>
     </ion-card>
 

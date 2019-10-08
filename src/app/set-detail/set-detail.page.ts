@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ToastController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
+
 @Component({
   selector: 'app-set-detail',
   templateUrl: './set-detail.page.html',
   styleUrls: ['./set-detail.page.scss'],
 })
 export class SetDetailPage implements OnInit {
+
 
   public cards: any
   public title: any
@@ -150,7 +152,8 @@ export class SetDetailPage implements OnInit {
       inputs: [
         {
           name: 'code',
-          type: 'text'
+          type: 'text',
+          placeholder: this._translate.instant('ImportCode')
         }
       ],
       buttons: [
@@ -186,6 +189,13 @@ export class SetDetailPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  onKeydownEvent(event: KeyboardEvent): void {
+    if (event.keyCode == 13) {
+        const target = event.currentTarget as HTMLIonInputElement
+        target.blur()
+    }
   }
 
 }
