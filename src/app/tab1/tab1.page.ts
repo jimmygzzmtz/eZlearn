@@ -118,7 +118,7 @@ export class Tab1Page {
         }
       }, {
         text: this._translate.instant('Battle'),
-        icon: 'logo-game-controller-a',
+        icon: 'game-controller-outline',
         handler: () => {
           this.play(set)
         }
